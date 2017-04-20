@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'css/[name].[contenthash:8].css'
+const cssFilename = 'css/[name].css'
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -40,23 +40,23 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 module.exports = {
   bail: true,
   devtool: 'source-map',
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: [require.resolve('./polyfills'), paths.appIndexJs, paths.appVendorJs],
   output: {
     path: paths.appBuild,
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
-    filename: 'js/[name].[chunkhash:8].js',
-    chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath
   },
   resolve: {
-    modules: ['node_modules', paths.appNodeModules],
+    modules: ['node_modules', paths.appNodeModules, paths.appVendorJs],
     extensions: ['.js', '.json', '.jsx']
   },
   resolveLoader: {
-    modules: [paths.appNodeModules]
+    modules: [paths.appNodeModules, paths.appVendorJs]
   },
   module: {
     rules: [
@@ -105,6 +105,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel-loader',
+        exclude: [/\.test\.jsx?$/, /\.story\.(js|jsx)$/],
         options: {
           babelrc: true
           // presets: [require.resolve('babel-preset-react-app')],
@@ -205,13 +206,6 @@ module.exports = {
     new webpack.optimize.AggressiveMergingPlugin({
       minSizeReduce: 1.5,
       moveToParents: true
-    }),
-
-    new webpack.DllReferencePlugin({
-      // An absolute path of your application source code
-      context: paths.appSrc,
-      // The path to the generated vendor-manifest file
-      manifest: paths.appManifestVendor
     }),
 
     new CompressionPlugin({

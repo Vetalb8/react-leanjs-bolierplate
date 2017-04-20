@@ -1,5 +1,11 @@
 {
-  "extends": ["babel", "prettier", "airbnb", "standard", "plugin:flowtype/recommended"],
+  "extends": [
+    "babel",
+    "prettier",
+    "airbnb",
+    "standard",
+    "plugin:flowtype/recommended"
+  ],
   "globals": {
     "fetch": true,
     "sinon": true,

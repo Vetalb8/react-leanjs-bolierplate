@@ -12,8 +12,6 @@ const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
 const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3000
 
-console.log('paths', paths)
-
 module.exports = {
   entry: [
     require.resolve('react-dev-utils-academy/webpackHotDevClient'),
@@ -90,7 +88,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         include: paths.appSrc,
-        exclude: [/node_modules/, /\.test\.jsx?$/],
+        exclude: [/node_modules/, /\.test\.jsx?$/, /\.story\.(js|jsx)$/],
         options: {
           babelrc: true,
           // presets: [require.resolve('babel-preset-react-app')],

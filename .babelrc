@@ -35,6 +35,7 @@
     "react-hot-loader/babel"
   ],
   "presets": [
+    "flow",
     [
       "babel-preset-latest",
       {
