@@ -14,8 +14,8 @@ const path = require('path')
 const url = require('url')
 const webpack = require('webpack')
 
-const config = process.env.SOLID === 'yes'
-  ? require('../config/webpack.config.prod-solid')
+const config = process.env.SPLIT === 'yes'
+  ? require('../config/webpack.config.prod-split')
   : require('../config/webpack.config.prod')
 
 const paths = require('../config/paths')
