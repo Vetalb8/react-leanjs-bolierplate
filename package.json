@@ -10,6 +10,7 @@
     "build": "node scripts/build.js",
     "build:split": "SPLIT=yes node scripts/build.js",
     "build:dll": "node scripts/buildVendor.js",
+    "build:storybook": "./node_modules/.bin/build-storybook -o .out",
     "storybook": "./node_modules/.bin/start-storybook -p 9001",
     "eslint": "./scripts/eslintWatcher",
     "prettier": "./node_modules/.bin/prettier-standard --trailing-comma es5 --single-quote --write src/**/*.js src/**/*.jsx",
