@@ -310,6 +310,12 @@ We only need to run the next command and browser on [http://localhost:9001/](htt
 yarn run storybook
 ```
 
+### Build static React Story Book
+It is usefull to provide an static style guide of the assets.
+```sh
+yarn run build:storybook
+```
+
 ### Add stories 
 It will only look inside "src" folder any file with the extension "*.story.(js|jsx)".
 Example of simple file, that will generate one of the menus, very "add" will be a case to show:
