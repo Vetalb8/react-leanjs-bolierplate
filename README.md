@@ -19,7 +19,7 @@ yarn run build
 That will generate a single bundle with their minified version of Javascript and CSS. 
 
 ### Vendor + App Bundle Build
-* First tou need to put all libraries used in the project, at the vendor file:
+* First you need to put all libraries used in the project, at the vendor file:
 ```
 react-leanjs-bolierplate/
   vendor/
@@ -46,10 +46,10 @@ That will generate only the App bundle with their minified version of Javascript
 
 ## Webpack 2 
 ### Features
-* Adding [Polyfills.js] file. That will help to add transparency and not mention anymore ["whatwg-fetch"], ["object-assign"] and ["es6-promise"] in the development files files.<br>
-All these files, plus some babel transformations (see babel chapter) it keeps React running in 95% of the browsers since 2011 (>=IE9). 
+* Adds [Polyfills.js] file. This will help to add transparency and not mention anymore ["whatwg-fetch"], ["object-assign"] and ["es6-promise"] in the development files files.<br>
+All these files, plus some babel transformations (see babel chapter) keeps React running in 95% of the browsers since 2011 (>=IE9). 
 * Hot Reload & watcher of any type of file inside "src" folder.
-* Error overlay in browser. No need to look more the console. 
+* Error overlay in browser. No need to look at the console. 
 * Check Linting before build.
 * Omit files: ".test.(js|jsx)" and ".story.(js|jsx)".
 * Add CSS transformations to support all browsers. ([postcss-loader]) Example:
@@ -62,20 +62,20 @@ Will generate:
 -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 ```
-* [InterpolateHtmlPlugin] with [HtmlWebpackPlugin] Generates an `index.html` file with the <script> injected. No needed to serve with express server.
+* [InterpolateHtmlPlugin] with [HtmlWebpackPlugin] Generates an `index.html` file with the <script> injected. No need to serve with an express server.
 * [ManifestPlugin] Generates a manifest.json for the site.
 
 ### Performance
-Added different tunne ups from React-create-app, Medium, Stack Overflow and more:
-* Faster Development Build with "cheap-module-source-map" and cache of the previous build. Only will build the difference.
+Added different tune ups from React-create-app, Medium, Stack Overflow and more:
+* Faster Development Build with "cheap-module-source-map" and cache of the previous build. It will only build the difference.
 * Minified (JS, CSS, HTML), Gziped (JS, CSS), removed comments, deleted dead code, deleted unused, AggressiveMergingPlugin.
-* [DllPlugin] & [DllReferencePlugin]: Helps to split in at least 2 files for lazy load or http2 load. The sum of the size of these 2 files is slightly bigger that the single one generated.
-* [ExtractTextPlugin] Concentrate all CSS files into one external file. Is usefull to develop the css by components but is performance to load only one file.
+* [DllPlugin] & [DllReferencePlugin]: Helps to split in at least 2 files for lazy load or http2 load. The sum of the size of these 2 files is slightly bigger than the single one generated.
+* [ExtractTextPlugin] Concentrate all CSS files into one external file. It's useful to develop the css by components but is more performant to load only one file.
 * [StatsPlugin] Generates a file "profile.json" that we can upload to check our tree dependecies. We can upload [here](http://webpack.github.io/analyse/)
 
 ## Testing
 ### Jest, Enzyme & Enzyme-to-Json
-Every file in "src" folder with the extension ".test.(js|jsx)" will be taken in the runner.
+Every file in "src" folder with the extension ".test.(js|jsx)" will be taken in by the runner.
 To run the test:
 ```sh
 yarn run test
@@ -110,16 +110,16 @@ yarn run stylefmt
 ```
 
 ### Prettier
-It helps to correct style writing issues in JS & JSX files.Can be manually executed:
+It helps to correct style writing issues in JS & JSX files. Can be manually executed:
 ```sh
 yarn run prettier
 ```
 
 ## React Story Book
-React Storybook is something you can use with your app right away. <br>It will help to develop your UI components separately and track later as a documentation.
+React Storybook is something you can use with your app right away. <br>It will help to develop your UI components separately and track them later as documentation.
 
 It has many features including:
-* Completely isolate the environment for your components (with the use of various iframe tactics).
+* Completely isolating the environment for your components (with the use of various iframe tactics).
 * HMR — hot module replacement (even for functional stateless components).
 * Works with any React app (whether it’s Redux, Relay or any React app).
 * Support for CSS (whether it’s plain old CSS, CSS modules or something fancy).
@@ -128,8 +128,8 @@ It has many features including:
 * Serves static files (if you host static files inside your app).
 * Extendable as required (support for custom webpack loaders and plugins).
 
-That version uses a custom Config and Webpack (Version 1, still waiting the oficial update).
-The plugins added to supercharge of powers that React Story Book are:
+This version uses a custom Config and Webpack (Version 1, still waiting for the oficial update).
+The plugins added to supercharge of powers the React Story Book are:
 
 * [knobs addon](https://www.npmjs.com/package/@kadira/storybook-addon-knobs) It helps to add variables easy configure/play in real time.<br>
 We can do Text, Number, Select, Date, Color, Array.... Best look playground [here](https://storybooks.js.org/storybook-addon-knobs/?knob-DOB=-2617594200000&knob-Name=Tom%20Cary&knob-today=1479515330701&knob-Color=black&knob-Passions%5B0%5D=Fishing&knob-Passions%5B1%5D=Skiing&knob-Favorite%20Number=42&knob-Style=%7B%22fontFamily%22%3A%22Arial%22%2C%22padding%22%3A20%7D&knob-My%20DOB=741983400000&knob-Bold=false&knob-Label=Hello%20Button&knob-Comfort%20Temp=72&selectedKind=Example%20of%20Knobs&selectedStory=with%20all%20knobs&full=0&down=1&left=1&panelRight=1&downPanel=kadirahq%2Fstorybook-addon-knobs)
@@ -189,7 +189,7 @@ storiesOf('Spinner Loader', module)
   ))
 ```
 
-* [react-storybook-addon-intl](https://www.npmjs.com/package/react-storybook-addon-intl) It helps you to test yout "react-intl" components in the differents locales.
+* [react-storybook-addon-intl](https://www.npmjs.com/package/react-storybook-addon-intl) It helps you to test your "react-intl" components in the differents locales.
 Example:
 ```js
 ...
@@ -223,7 +223,7 @@ storiesOf('Buttons', module)
   )
 ```
 
-* [@kadira/react-storybook-addon-info](https://www.npmjs.com/package/@kadira/react-storybook-addon-info) It helps to write infor of the component proptypes as a generic documentation. <br>
+* [@kadira/react-storybook-addon-info](https://www.npmjs.com/package/@kadira/react-storybook-addon-info) It helps to write info of the component proptypes as generic documentation. <br>
 We can generate Static files later to keep track of styling in the project.
 Example:
 ```js
@@ -239,8 +239,8 @@ storiesOf('Buttons', module)
   )
 ```
 
-* [react-storybook-addon-props-combinations](https://www.npmjs.com/package/react-storybook-addon-props-combinations) It helps to write in a sintetic way all differents propTypes that will change the component,<br>
-in order to test and view the result in a maintainable way. Every posibility has to be written inside of an array.
+* [react-storybook-addon-props-combinations](https://www.npmjs.com/package/react-storybook-addon-props-combinations) It helps to write in a synthetic way all the different propTypes that will change the component,<br>
+in order to test and view the result in a maintainable way. Every posibility has to be written inside an array.
 Example:
 ```js
 ...
@@ -263,7 +263,7 @@ storiesOf('Buttons', module)
 
 ```
 
-* [storybook-addon-material-ui](https://github.com/sm-react/storybook-addon-material-ui) That is awesome, it helps you to tune, play and update you components with Material UI and their themes or custom theme.
+* [storybook-addon-material-ui](https://github.com/sm-react/storybook-addon-material-ui) This is awesome, it helps you to tune, play and update you components with Material UI with their themes or a custom theme.
 Example:
 ```js
 ...
@@ -290,7 +290,7 @@ storiesOf('Material-UI', module)
 
 ```
 
-And when we download our custom theme, we can added, like this:
+And when we download our custom theme, we can add it, like this:
 ```js
 ...
 
@@ -311,14 +311,14 @@ yarn run storybook
 ```
 
 ### Build static React Story Book
-It is usefull to provide an static style guide of the assets.
+It is usefull to provide a static style guide of the assets.
 ```sh
 yarn run build:storybook
 ```
 
 ### Add stories 
-It will only look inside "src" folder any file with the extension "*.story.(js|jsx)".
-Example of simple file, that will generate one of the menus, very "add" will be a case to show:
+It will only look inside the "src" folder for any file with the extension "*.story.(js|jsx)".
+Example of a simple file, that will generate one of the menus, "add" will be the case to show:
 ```js
 import React from 'react'
 import { storiesOf, action } from '@kadira/storybook'
@@ -335,8 +335,8 @@ Static type checker, ultra recommended. We only need to create a comment on top:
 ```
 /* @flow */
 ```
-To take the power of Flow we need to spend time learning and creating the full checks, not a simple object or function check. That will not help at all.
-Recommend to check some of the [builtin types](https://github.com/facebook/flow/blob/master/lib/dom.js) usefull for Event.target.value and so on.
+To take advantage of the power of Flow we need to spend time learning and creating the full checks, not a simple object or function check. That will not help at all.
+We recommend checking out some of the [builtin types](https://github.com/facebook/flow/blob/master/lib/dom.js) useful for Event.target.value and so on.
 Example:
 ```js
 /* @flow */
@@ -352,11 +352,11 @@ const QuantityButtons = ({ quantity, addCourse, remCourse, inputCourse }: Quanti
 ```
 
 ## Babel
-We keep our config very updated for performance and support to latest features.
+We keep our config very updated for performance and to support the latest features.
 * Babel lastest with support for old browsers (>=IE9 - 2011).
 * Stage-0 Experimental to use all new features.
 * Flow support.
-* Added some transformations for performance as :
+* Added some transformations for performance such as:
   * "babel-plugin-transform-class-properties".
   * "babel-plugin-transform-object-rest-spread".
   * "babel-plugin-transform-react-jsx".
@@ -366,7 +366,7 @@ We keep our config very updated for performance and support to latest features.
   * "transform-react-constant-elements".
 
 ## Pre-commit
-Hook executed when we create a commit. That will execute the 3 linters (ESlint, Stylefmt and Prettier) over the files added. <br>
+Hook executed when we create a commit. This will execute the 3 linters (ESlint, Stylefmt and Prettier) over the files added. <br>
 If it doesn't pass the reformat, the commit won't be generated.
 
 ## Ready for React 15.5
@@ -391,5 +391,5 @@ QuantityButtons.defaultProps = {
 }
 ```
 
-We will keep updated. That is our default stack, it helps to develop faster. <br>
-At the moment we don't need to add Redux, React Router and extras, as they are not used it in every project (Small or Big).
+We will keep everything updated. This is our default stack, it helps us to develop faster. <br>
+At the moment we don't need to add Redux, React Router and extras, as they are not used in every project (Small or Big).
