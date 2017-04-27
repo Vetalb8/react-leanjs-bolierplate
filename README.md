@@ -16,10 +16,10 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
 ```sh
 yarn run build
 ```
-That will generate a single bundle with their minified version of Javascript and CSS. 
+This will generate a single bundle with a minified version of the Javascript and CSS. 
 
 ### Vendor + App Bundle Build
-* First you need to put all libraries used in the project, at the vendor file:
+* First you need to put all libraries used in the project, in the vendor file:
 ```
 react-leanjs-bolierplate/
   vendor/
@@ -35,19 +35,19 @@ require('react-dom')
 ```sh
 yarn run build:dll
 ```
-That will generate the vendor bundle minified and a manifest file used by webpack as a reference.<br>
-Once this file is generated, if we do not add more libraries, we don't need to generated anymore.<br>
+That will generate the minified vendor bundle in /build_vendor and a manifest file used by webpack as a reference.<br>
+Once this file is generated, if we do not add more libraries, we don't need to generate anymore.<br>
 
 * Finally we can generate the App bundle:
 ```sh
 yarn run build:split
 ```
-That will generate only the App bundle with their minified version of Javascript and CSS.<br>
+That will generate only the App bundle in /build/js with the minified version of the Javascript and CSS.<br>
 
 ## Webpack 2 
 ### Features
 * Adds [Polyfills.js] file. This will help to add transparency and not mention anymore ["whatwg-fetch"], ["object-assign"] and ["es6-promise"] in the development files files.<br>
-All these files, plus some babel transformations (see babel chapter) keeps React running in 95% of the browsers since 2011 (>=IE9). 
+All these files, plus some babel transformations (see babel chapter) keeps React running in 95% of browsers since 2011 (>=IE9). 
 * Hot Reload & watcher of any type of file inside "src" folder.
 * Error overlay in browser. No need to look at the console. 
 * Check Linting before build.
@@ -75,17 +75,17 @@ Added different tune ups from React-create-app, Medium, Stack Overflow and more:
 
 ## Testing
 ### Jest, Enzyme & Enzyme-to-Json
-Every file in "src" folder with the extension ".test.(js|jsx)" will be taken in by the runner.
+Every file in "src" folder with the extension ".test.(js|jsx)" will be taken in by the runner. Watch mode is enabled by default, once running press "a" to run all tests.
 To run the test:
 ```sh
 yarn run test
 ```
 
-To run the coverage:
+To run the coverage report:
 ```sh
 yarn run coverage
 ```
-Open later the browser with the html generated under the folder:
+Once run you can view it later in the browser with the html generated in the folder:
 ```
 react-leanjs-boilerplate/
   coverage/
