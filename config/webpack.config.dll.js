@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const InterpolateHtmlPlugin = require('react-dev-utils-academy/InterpolateHtmlPlugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const paths = require('./paths')
+const common = require('./webpack.common')
 
 const publicPath = paths.servedPath
 const shouldUseRelativeAssetPaths = publicPath === './'
@@ -51,32 +52,10 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         enforce: 'pre',
-        use: [
-          {
-            options: {
-              useEslintrc: true
-            },
-            loader: 'eslint-loader'
-          }
-        ],
+        use: common.esLint,
         include: paths.appVendorJs
       },
-      {
-        exclude: [
-          /\.html$/,
-          /\.(js|jsx)$/,
-          /\.css$/,
-          /\.json$/,
-          /\.bmp$/,
-          /\.gif$/,
-          /\.jpe?g$/,
-          /\.png$/
-        ],
-        loader: 'file-loader',
-        options: {
-          name: 'static/[name].[hash:8].[ext]'
-        }
-      },
+      common.fileLoader,
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
