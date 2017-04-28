@@ -1,6 +1,5 @@
 'use strict'
 
-const autoprefixer = require('autoprefixer')
 const paths = require('./paths')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -55,14 +54,7 @@ module.exports = {
       // "url" loader works like "file" loader except that it embeds assets
       // smaller than specified limit in bytes as data URLs to avoid requests.
       // A missing `test` is equivalent to a match.
-      {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'static/img/[name].[hash:8].[ext]'
-        }
-      },
+      common.urlLoader,
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -84,31 +76,7 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9' // React doesn't support IE8 anyway
-                  ]
-                })
-              ]
-            }
-          }
-        ]
+        use: ['style-loader', common.cssLoader, common.postcssLoader]
       }
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
@@ -126,11 +94,7 @@ module.exports = {
     new WatchMissingNodeModulesPlugin(paths.appNodeModules),
     new webpack.NamedModulesPlugin()
   ],
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
+  node: common.node,
   performance: {
     hints: false
   },

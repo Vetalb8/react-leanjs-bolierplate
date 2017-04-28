@@ -1,6 +1,5 @@
 'use strict'
 
-const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -56,14 +55,7 @@ module.exports = {
         include: paths.appVendorJs
       },
       common.fileLoader,
-      {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'static/img/[name].[hash:8].[ext]'
-        }
-      },
+      common.urlLoader,
       {
         test: /\.(js|jsx)$/,
         include: paths.appVendorJs,
@@ -79,30 +71,7 @@ module.exports = {
           Object.assign(
             {
               fallback: 'style-loader',
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1
-                  }
-                },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                    plugins: () => [
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9' // React doesn't support IE8 anyway
-                        ]
-                      })
-                    ]
-                  }
-                }
-              ]
+              use: [common.cssLoader, common.postcssLoader]
             },
             extractTextPluginOptions
           )
@@ -115,22 +84,7 @@ module.exports = {
   plugins: [
     new InterpolateHtmlPlugin(process.env.NODE_ENV),
 
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true
-      }
-    }),
+    new HtmlWebpackPlugin(common.htmlWebpackConfig),
 
     new webpack.DefinePlugin({
       'process.env': {
@@ -138,28 +92,7 @@ module.exports = {
       }
     }),
 
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        screw_ie8: true, // React doesn't support IE8
-        warnings: false,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      },
-      sourceMap: true
-    }),
+    new webpack.optimize.UglifyJsPlugin(common.uglifyJSconfig),
 
     new webpack.optimize.AggressiveMergingPlugin({
       minSizeReduce: 1.5,
@@ -180,10 +113,6 @@ module.exports = {
       minRatio: 0.8
     })
   ],
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
+  node: common.node,
   profile: true
 }
