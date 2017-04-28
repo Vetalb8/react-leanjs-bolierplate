@@ -1,6 +1,7 @@
 'use strict'
 
 const autoprefixer = require('autoprefixer')
+const paths = require('./paths')
 
 module.exports = {
   esLint: [
@@ -55,6 +56,22 @@ module.exports = {
           ]
         })
       ]
+    }
+  },
+  htmlWebpackConfig: {
+    inject: true,
+    template: paths.appHtml,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true
     }
   },
   uglifyJSconfig: {
