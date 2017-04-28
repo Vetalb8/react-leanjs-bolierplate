@@ -1,6 +1,5 @@
 'use strict'
 
-const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -9,6 +8,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils-academy/InterpolateHtmlPl
 const StatsPlugin = require('stats-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const paths = require('./paths')
+const common = require('./webpack.common')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -67,40 +67,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         enforce: 'pre',
-        use: [
-          {
-            options: {
-              useEslintrc: true
-            },
-            loader: 'eslint-loader'
-          }
-        ],
+        use: common.esLint,
         include: paths.appSrc
       },
-      {
-        exclude: [
-          /\.html$/,
-          /\.(js|jsx)$/,
-          /\.css$/,
-          /\.json$/,
-          /\.bmp$/,
-          /\.gif$/,
-          /\.jpe?g$/,
-          /\.png$/
-        ],
-        loader: 'file-loader',
-        options: {
-          name: 'static/[name].[hash:8].[ext]'
-        }
-      },
-      {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'static/img/[name].[hash:8].[ext]'
-        }
-      },
+      common.fileLoader,
+      common.urlLoader,
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
@@ -117,30 +88,7 @@ module.exports = {
           Object.assign(
             {
               fallback: 'style-loader',
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1
-                  }
-                },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                    plugins: () => [
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9' // React doesn't support IE8 anyway
-                        ]
-                      })
-                    ]
-                  }
-                }
-              ]
+              use: [common.cssLoader, common.postcssLoader]
             },
             extractTextPluginOptions
           )
@@ -174,28 +122,7 @@ module.exports = {
       }
     }),
     // Minify the code.
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        screw_ie8: true, // React doesn't support IE8
-        warnings: false,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      },
-      sourceMap: true
-    }),
+    new webpack.optimize.UglifyJsPlugin(common.uglifyJSconfig),
     new ExtractTextPlugin({
       filename: cssFilename
     }),
@@ -221,10 +148,6 @@ module.exports = {
       exclude: [/node_modules[\\\/]react/]
     })
   ],
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
+  node: common.node,
   profile: true
 }
