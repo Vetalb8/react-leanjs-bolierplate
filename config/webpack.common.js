@@ -57,6 +57,28 @@ module.exports = {
       ]
     }
   },
+  uglifyJSconfig: {
+    compress: {
+      screw_ie8: true, // React doesn't support IE8
+      warnings: false,
+      conditionals: true,
+      unused: true,
+      comparisons: true,
+      sequences: true,
+      dead_code: true,
+      evaluate: true,
+      if_return: true,
+      join_vars: true
+    },
+    mangle: {
+      screw_ie8: true
+    },
+    output: {
+      comments: false,
+      screw_ie8: true
+    },
+    sourceMap: true
+  },
   node: {
     fs: 'empty',
     net: 'empty',
