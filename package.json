@@ -4,8 +4,8 @@
   "description": "ReactJS Academy Boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "node scripts/testRunner.js",
-    "coverage": "node scripts/testRunner.js --coverage",
+    "test": "node scripts/testRunner.js --env=jsdom",
+    "coverage": "node scripts/testRunner.js  --env=jsdom --coverage",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build:split": "SPLIT=yes node scripts/build.js",
@@ -103,6 +103,7 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-flowtype": "^2.30.4",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jest": "^19.0.1",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-prettier": "^2.0.1",

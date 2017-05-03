@@ -17,5 +17,6 @@ module.exports = {
   host,
   port,
   historyApiFallback: true,
+  contentBase: './public',
   overlay: false
 }

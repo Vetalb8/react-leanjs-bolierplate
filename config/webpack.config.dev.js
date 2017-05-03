@@ -22,8 +22,8 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: paths.appBuild,
-    pathinfo: true,
-    publicPath: paths.publicPath
+    pathinfo: true
+    //publicPath: paths.publicPath
     // necessary for HMR to know where to load the hot update chunks
   },
   devtool: 'cheap-module-source-map',
